@@ -1,6 +1,7 @@
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 from advertisements.Permissions import IsOwnerPermission
+from advertisements.filters import AdvertisementFilter
 from advertisements.models import Advertisement
 from advertisements.serializers import AdvertisementSerializer
 from django_filters.rest_framework import DjangoFilterBackend
@@ -10,7 +11,7 @@ class AdvertisementViewSet(ModelViewSet):
     queryset = Advertisement.objects.all()
     serializer_class = AdvertisementSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['creator', 'status', 'created_at']
+    filterset_class = AdvertisementFilter
 
     # TODO: настройте ViewSet, укажите атрибуты для кверисета,
     #   сериализаторов и фильтров
